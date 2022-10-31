@@ -51,12 +51,9 @@ def main():
 
     # Track accuracy on all tasks.
     if args.num_tasks:
-        best_acc1 = [0.0 for _ in range(args.num_tasks)]
-        best_acc2 = [0.0 for _ in range(args.num_tasks)]
-        curr_acc1 = [0.0 for _ in range(args.num_tasks)]
-        curr_acc2 = [0.0 for _ in range(args.num_tasks)]
-        adapt_acc1 = [0.0 for _ in range(args.num_tasks)]
-        adapt_acc2 = [0.0 for _ in range(args.num_tasks)]
+        best_acc = [0.0 for _ in range(args.num_tasks)]
+        curr_acc = [0.0 for _ in range(args.num_tasks)]
+        adapt_acc = [0.0 for _ in range(args.num_tasks)]
 
     # Get the model.
     model = utils.get_model()
@@ -398,7 +395,7 @@ def main():
         )
 
 
-    return adapt_acc1
+    return adapt_acc
 
 
 # TODO: Remove this with task-eval
