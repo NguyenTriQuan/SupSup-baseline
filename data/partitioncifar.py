@@ -356,13 +356,10 @@ class SplitCIFAR100_10Tasks:
         size=[3,32,32]
         task_order=shuffle(np.arange(10),random_state=args.seed)
         print('Task order =',task_order+1)
+        tasknum = args.num_tasks
 
         mean=torch.tensor([x/255 for x in [125.3,123.0,113.9]])
         std=torch.tensor([x/255 for x in [63.0,62.1,66.7]])
-        if args.tasknum > 10:
-            tasknum = 10
-        else:
-            tasknum = args.tasknum
         # CIFAR100    
         train_set=datasets.CIFAR100('../dat/',train=True,download=True)
         test_set=datasets.CIFAR100('../dat/',train=False,download=True)
@@ -382,8 +379,6 @@ class SplitCIFAR100_10Tasks:
             ids = (train_targets//10 == task_order[t])
             images = train_data[ids]
             labels = train_targets[ids]%10 
-            if args.cil:
-                labels += n_old
 
             # r=np.arange(images.size(0))
             # r=np.array(shuffle(r,random_state=args.seed),dtype=int)
@@ -399,9 +394,7 @@ class SplitCIFAR100_10Tasks:
             ids = (test_targets//10 == task_order[t])
             images = test_data[ids]
             labels = test_targets[ids]%10
-            if args.cil:
-                labels += n_old
-            data[t]['test_loader'] = DataLoader(TensorDataset(images, labels), batch_size=args.val_batch_size, shuffle=False)
+            data[t]['test_loader'] = DataLoader(TensorDataset(images, labels), batch_size=args.test_batch_size, shuffle=False)
 
             n_old += 10
 

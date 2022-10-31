@@ -7,7 +7,7 @@ save: True
 # Dataset setup
 data: /path/to/dataset/parent
 set: SplitMiniImageNet20Tasks
-tasknum: 20
+num_tasks: 20
 input_size: 84
 
 # Model setup
