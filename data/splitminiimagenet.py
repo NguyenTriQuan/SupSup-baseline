@@ -68,10 +68,7 @@ class SplitMiniImageNet20Tasks:
         print('Task order =',task_order+1)
         mean = torch.tensor([0.485, 0.456, 0.406])
         std = torch.tensor([0.229, 0.224, 0.225])
-        if args.tasknum > 20:
-            tasknum = 20
-        else:
-            tasknum = args.tasknum
+        tasknum = args.num_tasks
         # CIFAR100    
         train_set = MiniImageNet('../dat/',train=True)
         test_set = MiniImageNet('../dat/',train=False)
@@ -91,8 +88,6 @@ class SplitMiniImageNet20Tasks:
             ids = (train_targets//5 == task_order[t])
             images = train_data[ids]
             labels = train_targets[ids]%5 
-            if args.cil:
-                labels += n_old
 
             # r=np.arange(images.size(0))
             # r=np.array(shuffle(r,random_state=args.seed),dtype=int)
@@ -108,9 +103,8 @@ class SplitMiniImageNet20Tasks:
             ids = (test_targets//5 == task_order[t])
             images = test_data[ids]
             labels = test_targets[ids]%5
-            if args.cil:
-                labels += n_old
-            data[t]['test_loader'] = DataLoader(TensorDataset(images, labels), batch_size=args.val_batch_size, shuffle=False)
+
+            data[t]['test_loader'] = DataLoader(TensorDataset(images, labels), batch_size=args.test_batch_size, shuffle=False)
 
             n_old += 5
 
