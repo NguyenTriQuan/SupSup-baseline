@@ -103,7 +103,7 @@ class ResNet(nn.Module):
         builder = Builder()
 
         self.base_width = int(args.width_mult * 64)
-        print('base width': self.base_width)
+        print('base width',self.base_width)
 
         if self.base_width // 64 > 1:
             print(f"==> Using {self.base_width // 64}x wide model")

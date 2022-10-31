@@ -19,7 +19,7 @@ class VGG(nn.Module):
 
         builder = Builder()
         size = args.input_size
-        self.layers = make_layers(cfg, n_channels, batch_norm=batch_norm)
+        self.layers = make_layers(cfg, 3, batch_norm=batch_norm)
 
         self.smid = size
         for m in self.layers:

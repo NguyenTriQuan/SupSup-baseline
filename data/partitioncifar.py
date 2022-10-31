@@ -11,6 +11,10 @@ import utils
 
 import torch.utils.data as data_utils
 from sklearn.utils import shuffle
+from torchvision import datasets, transforms
+from sklearn.utils import shuffle
+from torch.utils.data import  TensorDataset, DataLoader
+import kornia as K
 
 
 def partition_dataset(dataset, i):
@@ -381,11 +385,11 @@ class SplitCIFAR100_10Tasks:
             if args.cil:
                 labels += n_old
 
-            r=np.arange(images.size(0))
-            r=np.array(shuffle(r,random_state=args.seed),dtype=int)
-            nvalid=int(pc_valid*len(r))
-            ivalid=torch.LongTensor(r[:nvalid])
-            itrain=torch.LongTensor(r[nvalid:])
+            # r=np.arange(images.size(0))
+            # r=np.array(shuffle(r,random_state=args.seed),dtype=int)
+            # nvalid=int(pc_valid*len(r))
+            # ivalid=torch.LongTensor(r[:nvalid])
+            # itrain=torch.LongTensor(r[nvalid:])
             # data[t]['train_loader'] = DataLoader(TensorDataset(images[itrain], labels[itrain]), batch_size=args.batch_size, shuffle=True)
             # data[t]['valid_loader'] = DataLoader(TensorDataset(images[ivalid], labels[ivalid]), batch_size=args.val_batch_size, shuffle=False)
 
