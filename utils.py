@@ -119,10 +119,8 @@ def write_result_to_csv(**kwargs):
             (
                 "{now}, "
                 "{name}, "
-                "{curr_acc1:.04f}, "
-                "{best_acc1:.04f}, "
-                "{curr_acc2:.04f}, "
-                "{best_acc2:.04f}, "
+                "{curr_acc:.04f}, "
+                "{best_acc:.04f}, "
                 "{save_dir}\n"
             ).format(now=now, **kwargs)
         )
@@ -149,9 +147,8 @@ def write_adapt_results(**kwargs):
                 "{name}~task={task}~numtaskslearned={num_tasks_learned}~tasknumber={task_number}, "
                 "{task}, "
                 "{num_tasks_learned}, "
-                "{curr_acc1:.04f}, "
-                "{curr_acc2:.04f}, "
-                "{adapt_acc1:.04f}\n"
+                "{curr_acc:.04f}, "
+                "{adapt_acc:.04f}\n"
             ).format(now=now, **kwargs)
         )
 

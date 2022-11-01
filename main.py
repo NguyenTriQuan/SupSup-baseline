@@ -133,8 +133,7 @@ def main():
         )
 
         # Train and do inference and normal for args.epochs epcohs.
-        best_acc1 = 0.0
-        best_acc2 = 0.0
+        best_acc = 0.0
 
         for epoch in range(0, args.epochs):
             lr_scheduler(epoch, None)
@@ -184,8 +183,7 @@ def main():
                 run_base_dir / "final.pt",
             )
 
-        # return best_acc1
-        return best_acc2
+        return best_acc
 
     # Iterate through all tasks.
     for idx in range(args.num_tasks or 0):
