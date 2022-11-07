@@ -77,7 +77,10 @@ def main():
 
     # Put the model on the GPU,
     model = utils.set_gpu(model)
-
+    count = 0
+    for p in model.parameters():
+        count += p.numel()
+    print('num params', count)
     # Optionally resume from a checkpoint.
     if args.resume:
         if os.path.isfile(args.resume):
