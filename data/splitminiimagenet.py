@@ -64,7 +64,7 @@ class SplitMiniImageNet20Tasks:
         data={}
         taskcla=[]
         size=[3, 84, 84]
-        task_order=shuffle(np.arange(10),random_state=args.seed)
+        task_order=shuffle(np.arange(20),random_state=args.seed)
         print('Task order =',task_order+1)
         mean = torch.tensor([0.485, 0.456, 0.406])
         std = torch.tensor([0.229, 0.224, 0.225])
@@ -83,11 +83,11 @@ class SplitMiniImageNet20Tasks:
         for t in range(tasknum):
             data[t]={}
             data[t]['name']='mini_imagenet-'+str(task_order[t]+1)
-            data[t]['ncla']=10
+            data[t]['ncla']=5
             #train and valid
-            ids = (train_targets//10 == task_order[t])
+            ids = (train_targets//5 == task_order[t])
             images = train_data[ids]
-            labels = train_targets[ids]%10
+            labels = train_targets[ids]%5
 
             # r=np.arange(images.size(0))
             # r=np.array(shuffle(r,random_state=args.seed),dtype=int)
@@ -100,13 +100,12 @@ class SplitMiniImageNet20Tasks:
             data[t]['train_loader'] = DataLoader(TensorDataset(images, labels), batch_size=args.batch_size, shuffle=True)
 
             #test
-            ids = (test_targets//10 == task_order[t])
+            ids = (test_targets//5 == task_order[t])
             images = test_data[ids]
-            labels = test_targets[ids]%10
+            labels = test_targets[ids]%5
 
             data[t]['test_loader'] = DataLoader(TensorDataset(images, labels), batch_size=args.test_batch_size, shuffle=False)
 
-            n_old += 10
 
         # if args.augment:
         #     data['train_transform'] = torch.nn.Sequential(

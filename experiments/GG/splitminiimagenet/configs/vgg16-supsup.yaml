@@ -7,7 +7,7 @@ save: True
 # Dataset setup
 data: /path/to/dataset/parent
 set: SplitMiniImageNet20Tasks
-num_tasks: 10
+num_tasks: 20
 input_size: 84
 
 # Model setup
@@ -15,7 +15,7 @@ model: vgg16_bn
 conv_type: MultitaskMaskConv
 bn_type: MultitaskNonAffineBN
 conv_init: signed_constant
-output_size: 10
+output_size: 5
 er_sparsity: True
 sparsity: REPLACE
 

@@ -31,12 +31,12 @@ class VGG(nn.Module):
 
         self.last_layers = nn.ModuleList([
             # nn.Dropout(),
-            builder.conv1x1(512*self.smid*self.smid//2, 4096//2),
+            builder.conv1x1(512*self.smid*self.smid, 4096),
             nn.ReLU(True),
             # nn.Dropout(),
-            builder.conv1x1(4096//2, 4096//2),
+            builder.conv1x1(4096, 4096),
             nn.ReLU(True),
-            builder.conv1x1(4096//2, args.output_size, last_layer=True)
+            builder.conv1x1(4096, args.output_size, last_layer=True)
         ])
 
          # Initialize weights
@@ -66,7 +66,7 @@ def make_layers(cfg, n_channels, batch_norm=False):
         if v == 'M':
             layers += [nn.MaxPool2d(kernel_size=2, stride=2)]
         else:
-            v = v // 2
+            v = v
             conv2d = builder.conv3x3(in_channels, v, stride=1)
             if batch_norm:
                 layers += [conv2d, builder.batchnorm(v), nn.ReLU(inplace=True)]
